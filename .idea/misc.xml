@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/Snake/app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
+        <entry key="..\:/Android/Snake/app/src/main/res/drawable/btn_bg.xml" value="0.178" />
+        <entry key="..\:/Android/Snake/app/src/main/res/drawable/game_ctl_btn.xml" value="0.1995" />
+        <entry key="..\:/Android/Snake/app/src/main/res/drawable/nav_btn.xml" value="0.1995" />
+        <entry key="..\:/Android/Snake/app/src/main/res/drawable/nav_btn_bg.xml" value="0.244" />
+        <entry key="..\:/Android/Snake/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>
   </component>

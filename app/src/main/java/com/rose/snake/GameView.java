@@ -36,6 +36,8 @@ public class GameView extends View {
     private final LinkedList<Point> mSnake = new LinkedList<>();
     private Direction mDir;
 
+    private ScoreUpdatedListener mScoreUpdatedListener;
+
     private boolean mGameOver = false;
 
     private int mBoxSize;
@@ -44,12 +46,20 @@ public class GameView extends View {
     private final Paint mPaint = new Paint();
 
     public void init() {
-        mGameOver = false;
         mBoxSize = getContext().getResources()
                 .getDimensionPixelSize(R.dimen.game_size) / MAP_SIZE;
-        mBoxPadding = mBoxSize / 20;
+        mBoxPadding = mBoxSize / 10;
+    }
+
+    public void newGame() {
+        mGameOver = false;
         mDir = Direction.RIGHT;
         initMap();
+        updateScore();
+    }
+
+    public void setGameScoreUpdatedListener(ScoreUpdatedListener scoreUpdatedListener) {
+        mScoreUpdatedListener = scoreUpdatedListener;
     }
 
     private void initMap() {
@@ -58,6 +68,7 @@ public class GameView extends View {
                 mPoints[i][j] = new Point(j, i);
             }
         }
+        mSnake.clear();
         for (int i = 0; i < 3; i++) {
             Point point = getPoint(START_X + i, START_Y);
             point.type = PointType.SNAKE;
@@ -101,11 +112,19 @@ public class GameView extends View {
                 next.type = PointType.SNAKE;
                 mSnake.addFirst(next);
                 randomApple();
+                updateScore();
                 break;
             case SNAKE:
                 Log.d(TAG, "next: snake");
                 mGameOver = true;
                 break;
+        }
+    }
+
+    public void updateScore() {
+        if (mScoreUpdatedListener != null) {
+            int score = mSnake.size() - 3;
+            mScoreUpdatedListener.onScoreUpdated(score);
         }
     }
 
